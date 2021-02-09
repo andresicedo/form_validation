@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+     <form>
+             <label for="name">Username</label>
+             <br>
+             <input type="text" name="username" id="username" required>
+            <button type="submit">Submit</button>
+     </form>
+     <script>
+         const usernameInput = document.querySelector("#username");
+
+         usernameInput.addEventListener("change", e => {
+            if (usernameInput.value.length > 15) {
+                usernameInput.setCustomValidity(
+                    "Please enter a username less than 16 characters"
+                );
+            } else {
+                usernameInput.setCustomValidity("");
+            }
+            });
+     </script>
+</body>
+</html>

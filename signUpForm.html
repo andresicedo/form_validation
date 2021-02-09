@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <label for="name">Name</label>
+            <br>
+            <input type="text" name="name" id="name" required pattern="[A-Za-z]{5,15}">
+            <br>
+            <label for="password">Password</label>
+            <br>
+            <input type="password" name="password" id="password" required title="Letters or numbers (no special characters) between 5 and 15 characters"pattern="[A-Za-z0-9]{5,15}"> 
+            <br>
+            <label for="email">Email</label>
+            <br>
+            <input type="email" name="email" id="email" required>
+            <br>
+            <label for="about">About Me</label>
+            <br>
+            <textarea rows="4" cols="50" name="about" form="about"></textarea>
+            <br>
+            <label for="robot-check">Please Type: <strong>I am a human</strong></label>
+            <input id="robot-check" type="text" title="Please match the requested format." pattern="I am a human">
+            <br>
+            <button type="submit">Submit</button>
+        </fieldset>
+        
+        <script>
+            const nameInput = document.querySelector("#name");
+            const passwordInput = document.querySelector("#password");
+            const emailInput = document.querySelector("#email");   
+            const aboutInput = document.querySelector("#about");
+
+
+            nameInput.addEventListener("change", e => {
+            if (nameInput.value.length < 5) {
+                nameInput.setCustomValidity(
+                    "Please enter a username greater than 4 characters"
+                );
+            } else {
+                nameInput.setCustomValidity("");
+            }
+            });
+
+            passwordInput.addEventListener("change", e => {
+            if (passwordInput.value.length < 5 && passwordInput.value.length > 15) {
+                passwordInput.setCustomValidity(
+                    "Please enter a valid password\nMin characters: 6\nMax characters: 15"
+                );
+            } else {
+                passwordInput.setCustomValidity("");
+            }
+            });
+
+            emailInput.addEventListener("change", e => {
+                if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailInput.value)) {
+                    emailInput.setCustomValidity("");
+                } else {
+                    emailInput.setCustomValidity(
+                        "Please enter a valid email\nEx: name@website.com"
+                );
+            }
+            });
+
+            aboutInput.addEventListener("change", e => {
+                console.log("Remaining: " + (250 - aboutInput.value.length));
+                if (aboutInput.value.length > 250) {
+                    aboutInput.setCustomValidity(
+                        "Max Characters: 250"
+                    );
+                } else {
+                    aboutInput.setCustomValidity("");
+                }
+                });
+        </script>
+    </form>
+</body>
+</html>
